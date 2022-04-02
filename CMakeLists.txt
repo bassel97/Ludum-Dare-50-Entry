@@ -15,7 +15,7 @@ add_subdirectory(vendor/glad)
 
 set(SourceCode
     source/application/application.cc
-    source/window/window.cc
+    source/game/game.cc
     source/ui/ui.cc
     )
 
@@ -30,17 +30,23 @@ set(VendorCode
     vendor/imgui/backends/imgui_impl_opengl3.cpp
     )
 
-add_executable(LDGame source/entry-point.cc ${SourceCode} ${VendorCode})
+set(APP_ICON_RESOURCE_WINDOWS "assets/appicon.rc")
+
+add_executable(LDGame source/entry-point.cc ${SourceCode} ${VendorCode} ${APP_ICON_RESOURCE_WINDOWS})
 
 target_include_directories(LDGame PUBLIC
     source/application
-    source/window
+    source/game
     source/ui
+    source/ecs
    )
 
 target_include_directories(LDGame
     PUBLIC vendor/glad/include
     PUBLIC vendor/imgui
+    PUBLIC vendor/json
+    PUBLIC vendor/glm
+    PUBLIC vendor/stb
     )
 
 target_link_libraries(LDGame

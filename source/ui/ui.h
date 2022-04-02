@@ -14,23 +14,15 @@ public:
     UI(GLFWwindow *window);
     ~UI();
 
-    void Render();
-    void RenderDrawData();
+    void StartImGUIFrame();
+    void RenderImGUIFrame();
 
 private:
     UI(UI &&) = delete;
     UI &operator=(UI &&) = delete;
 
     GLFWwindow *window_;
-
-    bool show_demo_window_ = true;
-    bool show_another_window_ = false;
-    ImVec4 clear_color_ = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-    ImGuiIO* io;
-    bool* p_open;
-    bool opt_fullscreen = true;
-    bool opt_padding = true;
-    ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
+    ImGuiIO *io_;
 };
 
 #endif // LDGAME_UI_UI_H_

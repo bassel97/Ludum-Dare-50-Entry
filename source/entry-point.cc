@@ -1,6 +1,6 @@
-#include <application.h>
+#include <game.h>
 
 int main()
 {
-    Application().Run();
+    Game(1024, 720).Run();
 }
