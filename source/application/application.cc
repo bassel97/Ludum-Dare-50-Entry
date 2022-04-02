@@ -2,9 +2,15 @@
 
 Application::Application()
 {
+    window = new Window(1024, 720);
+}
+
+Application::~Application()
+{
+    delete window;
 }
 
 void Application::Run()
 {
-    std::cout << "Application Run!" << std::endl;
+    window->RunLoop();
 }
