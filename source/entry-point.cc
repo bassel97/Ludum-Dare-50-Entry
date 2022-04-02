@@ -1,6 +1,6 @@
-#include <iostream>
+#include <application.h>
 
 int main()
 {
-    std::cout << "Hello Game!" << std::endl;
+    Application().Run();
 }
