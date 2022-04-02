@@ -6,6 +6,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include <ui.h>
+
 class Window
 {
 public:
@@ -19,7 +21,8 @@ private:
     Window &operator=(Window &&) = delete;
 
     int width_, height_;
-    GLFWwindow *window;
+    GLFWwindow *window_;
+    UI* ui_class_;
 };
 
 #endif // LDGAME_WINDOW_WINDOW_H_
