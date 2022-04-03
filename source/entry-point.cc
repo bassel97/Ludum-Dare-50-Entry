@@ -1,6 +1,7 @@
+#include <Windows.h>
 #include <game.h>
 
-int main()
+int wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
 {
     Game(1024, 720).Run();
 }

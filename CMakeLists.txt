@@ -35,7 +35,7 @@ set(VendorCode
 
 set(APP_ICON_RESOURCE_WINDOWS "assets/appicon.rc")
 
-add_executable(LDGame source/entry-point.cc ${SourceCode} ${VendorCode} ${APP_ICON_RESOURCE_WINDOWS})
+add_executable(LDGame WIN32 source/entry-point.cc ${SourceCode} ${VendorCode} ${APP_ICON_RESOURCE_WINDOWS})
 
 target_include_directories(LDGame PUBLIC
     source/application
