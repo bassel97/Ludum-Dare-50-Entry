@@ -8,7 +8,8 @@ class Entity;
 class Component
 {
 public:
-private:
+    virtual ~Component() = 0;
+
     Entity *holding_entity_;
 };
 

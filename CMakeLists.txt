@@ -17,6 +17,9 @@ set(SourceCode
     source/application/application.cc
     source/game/game.cc
     source/ui/ui.cc
+    source/ecs/component.cc
+    source/ecs/components/camera/camera.cc
+    source/ecs/components/transform/transform.cc
     )
 
 set(VendorCode
