@@ -51,6 +51,8 @@ public:
         return NULL;
     }
 
+    Entity *parent_entity_ = NULL;
+
 private:
     Transform *transform_;
     std::vector<Component *> components_;

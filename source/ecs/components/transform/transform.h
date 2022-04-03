@@ -15,12 +15,7 @@ public:
     {
     }
 
-    glm::mat4 get_model_matrix() const
-    {
-        glm::mat4 transform = glm::translate(glm::mat4(1.0), position_);
-        transform = glm::scale(transform, scale_);
-        return transform;
-    }
+    glm::mat4 get_model_matrix() const;
 
     glm::vec3 position_;
     glm::vec3 rotation_euler_;

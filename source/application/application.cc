@@ -47,18 +47,26 @@ void Application::Run()
     OnGameStart();
     // render loop
     // -----------
+
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+
     while (!glfwWindowShouldClose(window_))
     {
-        ui_class_->StartImGUIFrame();
+        float currentFrame = static_cast<float>(glfwGetTime());
+        delta_time_ = currentFrame - last_frame_;
+        last_frame_ = currentFrame;
 
-        UIUpdate();
+        ui_class_->StartImGUIFrame();
 
         // render
         // ------
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        
-        OnGameUpdate();
+
+        UIUpdate(delta_time_);
+        OnGameUpdate(delta_time_);
+
         ui_class_->RenderImGUIFrame();
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)

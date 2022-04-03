@@ -1,21 +1,18 @@
 
-#ifndef LDGAME_ECS_SQUAREMODEL_H_
-#define LDGAME_ECS_SQUAREMODEL_H_
+#ifndef LDGAME_ECS_SQUAREMESH_H_
+#define LDGAME_ECS_SQUAREMESH_H_
 
-#include <component.h>
-#include <components/shader/shader.h>
-#include <components/shader/shaders-data.h>
-#include "square-mesh.h"
+#include <glad/glad.h>
 
 // TODO(Bassel): move some functionality to Model:Component
-class SquareModel : public Component
+class SquareMesh
 {
 public:
-    SquareModel(SquareMesh* square_mesh): square_mesh_(square_mesh)
+    SquareMesh()
     {
         // set up vertex data (and buffer(s)) and configure vertex attributes
         // ------------------------------------------------------------------
-        /*float vertices[] = {
+        float vertices[] = {
             1.0f, 1.0f, 0.0f,   // top right
             1.0f, -1.0f, 0.0f,  // bottom right
             -1.0f, -1.0f, 0.0f, // bottom left
@@ -48,42 +45,26 @@ public:
 
         // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
         // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
-        glBindVertexArray(0);*/
-
-        shaderProgram_ = new Shader(vertex_shader, fragment_shader);
+        glBindVertexArray(0);
     }
 
-    ~SquareModel()
+    ~SquareMesh()
     {
-        /*glDeleteVertexArrays(1, &VAO_);
+        glDeleteVertexArrays(1, &VAO_);
         glDeleteBuffers(1, &VBO_);
-        glDeleteBuffers(1, &EBO_);*/
-
-        delete shaderProgram_;
+        glDeleteBuffers(1, &EBO_);
     }
 
     void Render()
     {
-        shaderProgram_->use();
-
-        /*glBindVertexArray(VAO_); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+        glBindVertexArray(VAO_); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
         // glDrawArrays(GL_TRIANGLES, 0, 6);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        // glBindVertexArray(0); // no need to unbind it every time*/
-        square_mesh_->Render();
+        // glBindVertexArray(0); // no need to unbind it every time
     }
-
-    Shader *get_shader() const
-    {
-        return shaderProgram_;
-    }
-
-    glm::vec3 color_;
 
 private:
-    //unsigned int VBO_, VAO_, EBO_;
-    Shader *shaderProgram_;
-    SquareMesh *square_mesh_;
+    unsigned int VBO_, VAO_, EBO_;
 };
 
-#endif // LDGAME_ECS_SQUAREMODEL_H_
+#endif // LDGAME_ECS_SQUAREMESH_H_

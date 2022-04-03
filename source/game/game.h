@@ -7,6 +7,8 @@
 #include <ui.h>
 #include <world.h>
 #include <rendering-system.h>
+#include <components/camera/camera.h>
+#include <physics-system.h>
 
 class Game : public Application
 {
@@ -17,10 +19,12 @@ public:
 
 protected:
     void OnGameStart();
-    void OnGameUpdate();
+    void OnGameUpdate(float);
     void OnGameEnd();
 
-    void UIUpdate();
+    void UIUpdate(float);
+
+    SquareMesh square_mesh_;
 
     // bool show_demo_window = true;
     World *world_;
@@ -28,9 +32,10 @@ protected:
     Camera *main_camera_component_;
     Entity *camera_entity_;
 
-    SquareModel *square_component;
-    Transform *square_transform_component;
-    Entity *square_entity;
+    SquareModel *player_model_;
+    BoxCollider2D *player_box_collider_;
+    Transform *player_transform_component_;
+    Entity *player_entity_;
 };
 
 #endif // LDGAME_GAME_GAME_H_
