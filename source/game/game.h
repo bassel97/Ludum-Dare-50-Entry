@@ -24,6 +24,10 @@ protected:
 
     void UIUpdate(float);
 
+    Entity *CreateBarrierEntity(glm::vec3 position = glm::vec4(0.0f), glm::vec3 color = glm::vec4(1.0f));
+
+    const float dead_line_horz_speed = 4.0f;
+
     SquareMesh square_mesh_;
 
     // bool show_demo_window = true;
@@ -35,7 +39,11 @@ protected:
     SquareModel *player_model_;
     BoxCollider2D *player_box_collider_;
     Transform *player_transform_component_;
-    Entity *player_entity_;
+    Entity *player_entity_, *deadline_entity_;
+
+    std::vector<Entity*> barriers_;
+    
+    float score_ = 0;
 };
 
 #endif // LDGAME_GAME_GAME_H_

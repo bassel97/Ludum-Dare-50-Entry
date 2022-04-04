@@ -1,6 +1,8 @@
 #ifndef LDGAME_ECS_PHYSICSSYSTEM_H_
 #define LDGAME_ECS_PHYSICSSYSTEM_H_
 
+#include <iostream>
+
 #include <world.h>
 #include <components/physics/box-collider-2d.h>
 #include <components/physics/rigid-body-2d.h>
@@ -19,28 +21,48 @@ public:
             if (box_collider->static_)
                 continue;
 
+            bool collided_x = false;
+            bool collided_y = false;
+
+            box->get_transform()->position_.x += box_collider->speed_.x * delta_time;
+
             for (Entity *box_to_collide : boxes)
             {
                 if (box == box_to_collide)
                     continue;
 
-                box->get_transform()->position_.x += box_collider->speed_.x * delta_time;
-                if (box->get_transform()->position_.x < box_to_collide->get_transform()->position_.x + box_to_collide->get_transform()->scale_.x * 2.0f &&
-                    box->get_transform()->position_.x + box->get_transform()->scale_.x * 2.0f > box_to_collide->get_transform()->position_.x &&
-                    box->get_transform()->position_.y < box_to_collide->get_transform()->position_.y + box_to_collide->get_transform()->scale_.y * 2.0f &&
-                    box->get_transform()->position_.y + box->get_transform()->scale_.y * 2.0f > box_to_collide->get_transform()->position_.y)
+                if (box->get_transform()->position_.x < box_to_collide->get_transform()->position_.x + box_to_collide->get_transform()->scale_.x / 2.0f + box->get_transform()->scale_.x / 2.0f &&
+                    box->get_transform()->position_.x + box->get_transform()->scale_.x / 2.0f + box_to_collide->get_transform()->scale_.x / 2.0f > box_to_collide->get_transform()->position_.x &&
+                    box->get_transform()->position_.y < box_to_collide->get_transform()->position_.y + box_to_collide->get_transform()->scale_.y / 2.0f + +box->get_transform()->scale_.y / 2.0f &&
+                    box->get_transform()->position_.y + box->get_transform()->scale_.y / 2.0f + box_to_collide->get_transform()->scale_.y / 2.0f > box_to_collide->get_transform()->position_.y)
                 {
-                    box->get_transform()->position_.x -= box_collider->speed_.x * delta_time;
+                    collided_x = true;
+                    break;
                 }
+            }
+            if (collided_x)
+            {
+                box->get_transform()->position_.x -= box_collider->speed_.x * delta_time;
+            }
 
-                box->get_transform()->position_.y += box_collider->speed_.y * delta_time;
-                if (box->get_transform()->position_.x < box_to_collide->get_transform()->position_.x + box_to_collide->get_transform()->scale_.x * 2.0f &&
-                    box->get_transform()->position_.x + box->get_transform()->scale_.x * 2.0f > box_to_collide->get_transform()->position_.x &&
-                    box->get_transform()->position_.y < box_to_collide->get_transform()->position_.y + box_to_collide->get_transform()->scale_.y * 2.0f &&
-                    box->get_transform()->position_.y + box->get_transform()->scale_.y * 2.0f > box_to_collide->get_transform()->position_.y)
+            box->get_transform()->position_.y += box_collider->speed_.y * delta_time;
+            for (Entity *box_to_collide : boxes)
+            {
+                if (box == box_to_collide)
+                    continue;
+
+                if (box->get_transform()->position_.x < box_to_collide->get_transform()->position_.x + box_to_collide->get_transform()->scale_.x / 2.0f + box->get_transform()->scale_.x / 2.0f &&
+                    box->get_transform()->position_.x + box->get_transform()->scale_.x / 2.0f + box_to_collide->get_transform()->scale_.x / 2.0f > box_to_collide->get_transform()->position_.x &&
+                    box->get_transform()->position_.y < box_to_collide->get_transform()->position_.y + box_to_collide->get_transform()->scale_.y / 2.0f + +box->get_transform()->scale_.y / 2.0f &&
+                    box->get_transform()->position_.y + box->get_transform()->scale_.y / 2.0f + box_to_collide->get_transform()->scale_.y / 2.0f > box_to_collide->get_transform()->position_.y)
                 {
-                    box->get_transform()->position_.y -= box_collider->speed_.y * delta_time;
+                    collided_y = true;
+                    break;
                 }
+            }
+            if (collided_y)
+            {
+                box->get_transform()->position_.y -= box_collider->speed_.y * delta_time;
             }
         }
     }

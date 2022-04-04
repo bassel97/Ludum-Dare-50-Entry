@@ -10,9 +10,7 @@ class BoxCollider2D : public Component
 public:
     bool static_ = false;
     glm::vec3 speed_ = glm::vec3(0.0f);
-    /*void Move(glm::vec3 direction)
-    {
-    }*/
+    std::string tag = "";
 };
 
 #endif // LDGAME_PHYSICS_BOXCOLLIDER2D_H_

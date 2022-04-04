@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(LDGame VERSION 1.0)
+project(Deadline VERSION 1.0)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -35,16 +35,16 @@ set(VendorCode
 
 set(APP_ICON_RESOURCE_WINDOWS "assets/appicon.rc")
 
-add_executable(LDGame WIN32 source/entry-point.cc ${SourceCode} ${VendorCode} ${APP_ICON_RESOURCE_WINDOWS})
+add_executable(Deadline WIN32 source/entry-point.cc ${SourceCode} ${VendorCode} ${APP_ICON_RESOURCE_WINDOWS})
 
-target_include_directories(LDGame PUBLIC
+target_include_directories(Deadline PUBLIC
     source/application
     source/game
     source/ui
     source/ecs
    )
 
-target_include_directories(LDGame
+target_include_directories(Deadline
     PUBLIC vendor/glad/include
     PUBLIC vendor/imgui
     PUBLIC vendor/json
@@ -52,6 +52,6 @@ target_include_directories(LDGame
     PUBLIC vendor/stb
     )
 
-target_link_libraries(LDGame
+target_link_libraries(Deadline
     PUBLIC glfw
     PUBLIC glad)
